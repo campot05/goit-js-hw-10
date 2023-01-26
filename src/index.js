@@ -11,7 +11,7 @@ const infoEl = document.querySelector('.country-info');
 
 const clearItem = item => (item.innerHTML = '');
 
-input.addEventListener('input', Debounce(findCountries, 300));
+input.addEventListener('input', Debounce(findCountries, DEBOUNCE_DELAY));
 
 function findCountries() {
   const value = input.value.trim();
