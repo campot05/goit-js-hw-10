@@ -25,13 +25,11 @@ function findCountries() {
     .then(data => {
       if (data.length > 10) {
         clearItem(listEl);
-
         Notify.info(
           'Too many matches found. Please enter a more specific name.'
         );
         return;
       }
-      console.log('then');
       markupRender(data);
     })
     .catch(err => {
@@ -56,12 +54,14 @@ function markupRender(data) {
 
 function createItem(data) {
   return data.map(({ name, capital, population, flags, languages }) => {
-    return `<h1><img src="${flags.svg}" alt="${
+    return `<h1 class='country-info__title'><img src="${flags.svg}" alt="${
       name.official
-    }" width='50' heigth='50'> ${name.common}</h1>
-		<p>Capital: ${capital[0]}</p>
-		<p>Population: ${population}</p>
-		<p>Languages: ${Object.values(languages)}</p>`;
+    }" width='50' heigth='50' > ${name.common}</h1>
+		<p class='country-info__name'>Capital: <span>${capital[0]}</span></p>
+		<p class='country-info__name'>Population: <span>${population}</span></p>
+		<p class='country-info__name'>Languages: 	<span>${Object.values(
+      languages
+    )}</span></p>`;
   });
 }
 
@@ -69,7 +69,7 @@ function createList(data) {
   return data
     .map(
       ({ name, flags }) =>
-        `<li><img src="${flags.png}" alt="${name.common}" width='45'>${name.common}</li>`
+        `<li class='country-list__item'><img src="${flags.png}" alt="${name.common}" width='45'>${name.common}</li>`
     )
     .join('');
 }
